@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const Page = styled.div``;
 const Form = styled.form`
   width: 645px;
   background-color: #fff;
@@ -113,16 +112,6 @@ const SubmitButton = styled.button`
   border: 1px solid #fad312;
   cursor: pointer;
 `;
-const Footer = styled.div`
-  width: 100%;
-  color: #999999;
-  background-color: black;
-  padding: 30px 0;
-  text-align: center;
-  border-top: 1px solid #fad312;
-  position: absolute;
-  bottom: 0;
-`;
 
 export default function Forms() {
   const [formList, setFormList] = useState({
@@ -175,124 +164,119 @@ export default function Forms() {
     alert(alertFormListContent);
   };
   return (
-    <Page>
-      <Form onSubmit={handleSubmit}>
-        <Desc>
-          <h1>新拖延運動報名表單</h1>
-          <div className="form-desc">
-            <p>活動日期：2020/12/10 ~ 2020/12/11</p>
-            <p>活動地點：台北市大安區新生南路二段1號</p>
-            <p className="not-null">* 必填</p>
-          </div>
-        </Desc>
-        <Name>
-          <Label htmlFor="name" className="not-null">
-            暱稱
-          </Label>
+    <Form onSubmit={handleSubmit}>
+      <Desc>
+        <h1>新拖延運動報名表單</h1>
+        <div className="form-desc">
+          <p>活動日期：2020/12/10 ~ 2020/12/11</p>
+          <p>活動地點：台北市大安區新生南路二段1號</p>
+          <p className="not-null">* 必填</p>
+        </div>
+      </Desc>
+      <Name>
+        <Label htmlFor="name" className="not-null">
+          暱稱
+        </Label>
+        <Input
+          type="text"
+          id="name"
+          name="nickName"
+          placeholder="您的回答"
+          value={formList["nickName"]}
+          onChange={handleInputChange}
+        />
+        {!formList["notNull"] ||
+          (!formList["nickName"] && <WarnMessage>此欄位必填</WarnMessage>)}
+      </Name>
+      <Email>
+        <Label htmlFor="email" className="not-null">
+          電子郵件
+        </Label>
+        <Input
+          type="email"
+          id="email"
+          name="emailAddress"
+          placeholder="您的電子郵件"
+          value={formList["emailAddress"]}
+          onChange={handleInputChange}
+        />
+        {!formList["notNull"] ||
+          (!formList["emailAddress"] && <WarnMessage>此欄位必填</WarnMessage>)}
+      </Email>
+      <Phone>
+        <Label htmlFor="phone" className="not-null">
+          手機號碼
+        </Label>
+        <Input
+          type="tel"
+          id="phone"
+          name="cellPhone"
+          placeholder="您的手機號碼"
+          value={formList["cellPhone"]}
+          onChange={handleInputChange}
+        />
+        {!formList["notNull"] ||
+          (!formList["cellPhone"] && <WarnMessage>此欄位必填</WarnMessage>)}
+      </Phone>
+      <Category>
+        <p className="categories-title">報名類型</p>
+        <div className="category">
           <Input
-            type="text"
-            id="name"
-            name="nickName"
-            placeholder="您的回答"
-            value={formList["nickName"]}
+            type="radio"
+            id="on-bed"
+            name="category"
+            value="躺在床上用想像力實作"
+          />
+          <Label htmlFor="on-bed" className="on-the-bed">
+            躺在床上用想像力實作
+          </Label>
+        </div>
+        <div className="category">
+          <Input
+            type="radio"
+            id="on-phone"
+            name="category"
+            value="趴在地上滑手機找現成的"
             onChange={handleInputChange}
           />
-          {!formList["notNull"] ||
-            (!formList["nickName"] && <WarnMessage>此欄位必填</WarnMessage>)}
-        </Name>
-        <Email>
-          <Label htmlFor="email" className="not-null">
-            電子郵件
+          <Label htmlFor="on-phone" className="on-the-phone">
+            趴在地上滑手機找現成的
           </Label>
-          <Input
-            type="email"
-            id="email"
-            name="emailAddress"
-            placeholder="您的電子郵件"
-            value={formList["emailAddress"]}
-            onChange={handleInputChange}
-          />
-          {!formList["notNull"] ||
-            (!formList["emailAddress"] && (
-              <WarnMessage>此欄位必填</WarnMessage>
-            ))}
-        </Email>
-        <Phone>
-          <Label htmlFor="phone" className="not-null">
-            手機號碼
-          </Label>
-          <Input
-            type="tel"
-            id="phone"
-            name="cellPhone"
-            placeholder="您的手機號碼"
-            value={formList["cellPhone"]}
-            onChange={handleInputChange}
-          />
-          {!formList["notNull"] ||
-            (!formList["cellPhone"] && <WarnMessage>此欄位必填</WarnMessage>)}
-        </Phone>
-        <Category>
-          <p className="categories-title">報名類型</p>
-          <div className="category">
-            <Input
-              type="radio"
-              id="on-bed"
-              name="category"
-              value="躺在床上用想像力實作"
-            />
-            <Label htmlFor="on-bed" className="on-the-bed">
-              躺在床上用想像力實作
-            </Label>
-          </div>
-          <div className="category">
-            <Input
-              type="radio"
-              id="on-phone"
-              name="category"
-              value="趴在地上滑手機找現成的"
-              onChange={handleInputChange}
-            />
-            <Label htmlFor="on-phone" className="on-the-phone">
-              趴在地上滑手機找現成的
-            </Label>
-          </div>
-          {!formList["notNull"] ||
-            (!formList["category"] && <WarnMessage>此欄位必選</WarnMessage>)}
-        </Category>
-        <Activity>
-          <Label htmlFor="activity" className="not-null">
-            怎麼知道這個活動的？
-          </Label>
-          <Input
-            type="text"
-            id="activity"
-            name="howToKnow"
-            placeholder="您的回答"
-            value={formList["howToKnow"]}
-            onChange={handleInputChange}
-          />
-          {!formList["notNull"] ||
-            (!formList["howToKnow"] && <WarnMessage>此欄位必選</WarnMessage>)}
-        </Activity>
-        <Suggestion>
-          <Label htmlFor="other" className="other-comments">
-            其他
-          </Label>
-          <p>對活動的一些建議</p>
-          <Input
-            type="text"
-            id="other"
-            name="other"
-            placeholder="您的回答"
-            value={formList["other"]}
-            onChange={handleInputChange}
-          />
-        </Suggestion>
-        <SubmitButton>提交</SubmitButton>
-        <p>請勿透過表單送出您的密碼。</p>
-      </Form>
-      <Footer>© 2020 © Copyright. All rights Reserved.</Footer>
-    </Page>
+        </div>
+        {!formList["notNull"] ||
+          (!formList["category"] && <WarnMessage>此欄位必選</WarnMessage>)}
+      </Category>
+      <Activity>
+        <Label htmlFor="activity" className="not-null">
+          怎麼知道這個活動的？
+        </Label>
+        <Input
+          type="text"
+          id="activity"
+          name="howToKnow"
+          placeholder="您的回答"
+          value={formList["howToKnow"]}
+          onChange={handleInputChange}
+        />
+        {!formList["notNull"] ||
+          (!formList["howToKnow"] && <WarnMessage>此欄位必選</WarnMessage>)}
+      </Activity>
+      <Suggestion>
+        <Label htmlFor="other" className="other-comments">
+          其他
+        </Label>
+        <p>對活動的一些建議</p>
+        <Input
+          type="text"
+          id="other"
+          name="other"
+          placeholder="您的回答"
+          value={formList["other"]}
+          onChange={handleInputChange}
+        />
+      </Suggestion>
+      <SubmitButton>提交</SubmitButton>
+      <p>請勿透過表單送出您的密碼。</p>
+    </Form>
   );
 }
